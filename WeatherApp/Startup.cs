@@ -36,7 +36,7 @@ namespace WeatherApp
             {
                 using var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
                 {
-                    //context.Database.Migrate();
+                    context.Database.Migrate();
                     SeedData.SeedWeatherSummaryData(context);
                     context.SaveChanges();
                 }

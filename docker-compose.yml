@@ -23,6 +23,8 @@ services:
       - ConnectionStrings:DefaultConnection=Server=postgres_db;port=5432;user id=postgres;password=example;database=Weather;
     ports:
       - "5030:80"
+    depends_on:
+      - postgres_db
 
 volumes:
   postgres:
