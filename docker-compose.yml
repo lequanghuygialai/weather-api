@@ -1,6 +1,16 @@
 version: '3.5'
 
 services:
+  nginx:
+    container_name: nginx
+    build:
+      context: ./nginx
+      dockerfile: Dockerfile
+    ports:
+      - "5050:80"
+    depends_on:
+      - weather_api
+
   postgres_db:
     container_name: postgres_db
     image: postgres
@@ -15,16 +25,14 @@ services:
     restart: unless-stopped
 
   weather_api:
-    container_name: weather_api
     build:
       context: ./WeatherApp
       dockerfile: Dockerfile
     environment:
       - ConnectionStrings:DefaultConnection=Server=postgres_db;port=5432;user id=postgres;password=example;database=Weather;
-    ports:
-      - "5030:80"
     depends_on:
       - postgres_db
+    scale: 2
 
 volumes:
   postgres:
