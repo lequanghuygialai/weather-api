@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: weather-api-pod
+  labels:
+    component: weather-api
+spec:
+  containers:
+    - name: weather-api
+      image: lequanghuygialai/weather-api
+      ports:
+        - containerPort: 80
+      env:
+        - name: ConnectionStrings__DefaultConnection
+          value: "Server=postgres-db-node-port;port=5432;user id=postgres;password=example;database=Weather;"
