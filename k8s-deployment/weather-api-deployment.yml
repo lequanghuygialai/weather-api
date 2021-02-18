@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: weather-api-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      component: weather-api
+  template:
+    metadata:
+      labels:
+        component: weather-api
+    spec:
+      containers:
+        - name: weather-api
+          image: lequanghuygialai/weather-api
+          ports:
+            - containerPort: 80
+          env:
+            - name: ConnectionStrings__DefaultConnection
+              value: "Server=postgres-db-node-port;port=5432;user id=postgres;password=example;database=Weather;"
